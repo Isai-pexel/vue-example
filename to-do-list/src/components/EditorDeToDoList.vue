@@ -4,11 +4,6 @@
     <h1>Editar to-do:  {{indice}} - {{ tarea }}</h1>
     <input v-bind:value="tarea"/>
     <button>Guardar</button>
-
-    <h1>Editar to-do: {{ indice }}-{{ tarea }}</h1>
-    <input v-bind:value="tarea" />
-    <button>Guardar</button>
-
     <h1>{{ textoDeEjmplo }}</h1>
 
   </section>

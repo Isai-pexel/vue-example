@@ -38,24 +38,7 @@
   <p>Total de tareas: {{ totalDeTareas }}</p>
   <hr>
   <editor-de-to-do-list v-if="MostrarEditor" v-bind:tarea="tareaQueEstoyEditando" v-bind:indice="index"/>
-      <button v-on:click="editarElemento(index, tarea)">Editar</button>
-      <button v-on:click="eliminarElemento(index)">Completar</button>
-    </li>
-  </ul>
 
-  <h2>Tareas Completadas</h2>
-  <p v-if="contadorDeTareasCompletadas === 0">
-    <span>No hay tareas completadas</span>
-  </p>
-  <ul v-else style="min-height: 100px; background-color: green">
-    <li v-for="(tarea, index) in tareasCompletadas" v-bind:key="index">{{ index }}-{{ tarea }}</li>
-  </ul>
-
-  <h2>Resumen de tareas</h2>
-  <p>Completadas: {{ contadorDeTareasCompletadas }} | Pendientes: {{ tareasPendientes }}</p>
-  <p>Total de tareas: {{ totalDeTareas }}</p>
-
-  <hr />
   Quiero editar la tarea: {{ tareaQueEstoyEditando }}
   <editor-de-to-do-list
     v-if="mostrarEditor"
@@ -87,29 +70,6 @@ export default {
     }
   },
 
-  computed:{
-    tareasPendientes(){
-      return this.listaDeTareas.length
-
-    },
-
-    ContadorDeTareasCompletadas(){
-      return this.tareasCompletadas.length
-    },
-
-    totalDeTareas(){
-      return this.tareasPendientes + this.ContadorDeTareasCompletadas
-    }
-
-
-
-      mostrarEditor: false,
-      tareaQueEstoyEditando: '',
-      indiceQueEstoyEditando: null,
-
-      fechaDeHoy: '19 de marzo de 2025',
-    }
-  },
 
   computed: {
     tareasPendientes() {
@@ -143,12 +103,6 @@ export default {
 
 
     },
-
-  },
-
-  components:{
-      'editor-de-to-do-list': EditorDeToDoList
-    },
     eliminarElemento(index) {
       //   alert('Eliminar elemento en la posición #' + index)
       this.tareasCompletadas.push(this.listaDeTareas[index])
@@ -161,13 +115,19 @@ export default {
       this.tareaQueEstoyEditando = tarea
       this.indiceQueEstoyEditando = index
     },
+
   },
 
-  components: {
-    'editor-de-to-do-list': EditorDeToDoList,
+  components:{
+      'editor-de-to-do-list': EditorDeToDoList
+
   },
 }
+
+
 </script>
+
+
 
 
 
