@@ -26,6 +26,8 @@ export default {
     indice:{
       type: Number,
     }
+  }
+}
 =======
 export default {
   props: {
