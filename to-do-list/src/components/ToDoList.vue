@@ -12,6 +12,7 @@
   <ul v-else>
     <li v-for="(tarea, index) in listaDeTareas" v-bind:key="index">
       {{ index }}-{{ tarea }}
+<<<<<<< HEAD
       <button v-on:click="Completar(index)">Completar</button>
       <button v-on:click="Editar(tarea)">Editar</button>
     </li>
@@ -38,6 +39,39 @@
   <p>Total de tareas: {{ totalDeTareas }}</p>
   <hr>
   <editor-de-to-do-list v-if="MostrarEditor" v-bind:tarea="tareaQueEstoyEditando" v-bind:indice="index"/>
+=======
+      <button v-on:click="editarElemento(index, tarea)">Editar</button>
+      <button v-on:click="eliminarElemento(index)">Completar</button>
+    </li>
+  </ul>
+
+  <h2>Tareas Completadas</h2>
+  <p v-if="contadorDeTareasCompletadas === 0">
+    <span>No hay tareas completadas</span>
+  </p>
+  <ul v-else style="min-height: 100px; background-color: green">
+    <li v-for="(tarea, index) in tareasCompletadas" v-bind:key="index">{{ index }}-{{ tarea }}</li>
+  </ul>
+
+  <h2>Resumen de tareas</h2>
+  <p>Completadas: {{ contadorDeTareasCompletadas }} | Pendientes: {{ tareasPendientes }}</p>
+  <p>Total de tareas: {{ totalDeTareas }}</p>
+
+  <hr />
+  Quiero editar la tarea: {{ tareaQueEstoyEditando }}
+  <editor-de-to-do-list
+    v-if="mostrarEditor"
+    v-bind:tarea="tareaQueEstoyEditando"
+    v-bind:indice="indiceQueEstoyEditando"
+    v-bind:fecha="fechaDeHoy"
+    v-bind:textoDeEjmplo="titulo"
+  />
+
+  <!-- <pre>
+    {{ listaDeTareas }}
+  </pre>
+  <pre> {{ tareasCompletadas }}</pre> -->
+>>>>>>> 6406a0f277aaf56e9c7a23a93b5dc4c8d0eb8150
 </template>
 
 <script>
@@ -50,6 +84,7 @@ export default {
       listaDeTareas: ['Instalar Vue', 'Abrirlo en el navegador'],
       tareaNueva: '',
       tareasCompletadas: [],
+<<<<<<< HEAD
       MostrarEditor: false,
       tareaQueEstoyEditando:"",
 
@@ -70,6 +105,29 @@ export default {
       return this.tareasPendientes + this.ContadorDeTareasCompletadas
     }
 
+=======
+
+      mostrarEditor: false,
+      tareaQueEstoyEditando: '',
+      indiceQueEstoyEditando: null,
+
+      fechaDeHoy: '19 de marzo de 2025',
+    }
+  },
+
+  computed: {
+    tareasPendientes() {
+      return this.listaDeTareas.length
+    },
+
+    contadorDeTareasCompletadas() {
+      return this.tareasCompletadas.length
+    },
+
+    totalDeTareas() {
+      return this.tareasPendientes + this.contadorDeTareasCompletadas
+    },
+>>>>>>> 6406a0f277aaf56e9c7a23a93b5dc4c8d0eb8150
   },
 
   methods: {
@@ -77,6 +135,7 @@ export default {
       this.listaDeTareas.push(this.tareaNueva)
     },
 
+<<<<<<< HEAD
     Completar(index) {
       //   alert('Eliminar elemento en la posición #' + index)
       this.tareasCompletadas.push(this.listaDeTareas[index])
@@ -95,6 +154,25 @@ export default {
   components:{
       'editor-de-to-do-list': EditorDeToDoList
     },
+=======
+    eliminarElemento(index) {
+      //   alert('Eliminar elemento en la posición #' + index)
+      this.tareasCompletadas.push(this.listaDeTareas[index])
+
+      this.listaDeTareas.splice(index, 1)
+    },
+
+    editarElemento(index, tarea) {
+      this.mostrarEditor = true
+      this.tareaQueEstoyEditando = tarea
+      this.indiceQueEstoyEditando = index
+    },
+  },
+
+  components: {
+    'editor-de-to-do-list': EditorDeToDoList,
+  },
+>>>>>>> 6406a0f277aaf56e9c7a23a93b5dc4c8d0eb8150
 }
 </script>
 
