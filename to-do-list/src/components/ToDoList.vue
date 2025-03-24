@@ -12,7 +12,8 @@
   <ul v-else>
     <li v-for="(tarea, index) in listaDeTareas" v-bind:key="index">
       {{ index }}-{{ tarea }}
-      <button v-on:click="eliminarElemento(index)">Completar</button>
+      <button v-on:click="Completar(index)">Completar</button>
+      <button v-on:click="Editar(tarea)">Editar</button>
     </li>
   </ul>
   <!-- <pre>
@@ -35,9 +36,13 @@
   <!-- length muestra el tamaño de la lista -->
   <p>Completadas: {{ ContadorDeTareasCompletadas }} | Pendientes: {{ tareasPendientes }}</p>
   <p>Total de tareas: {{ totalDeTareas }}</p>
+  <hr>
+  <editor-de-to-do-list v-if="MostrarEditor" v-bind:tarea="tareaQueEstoyEditando" v-bind:indice="index"/>
 </template>
 
 <script>
+import EditorDeToDoList from './EditorDeToDoList.vue'
+
 export default {
   data() {
     return {
@@ -45,6 +50,9 @@ export default {
       listaDeTareas: ['Instalar Vue', 'Abrirlo en el navegador'],
       tareaNueva: '',
       tareasCompletadas: [],
+      MostrarEditor: false,
+      tareaQueEstoyEditando:"",
+
     }
   },
 
@@ -69,16 +77,28 @@ export default {
       this.listaDeTareas.push(this.tareaNueva)
     },
 
-    eliminarElemento(index) {
+    Completar(index) {
       //   alert('Eliminar elemento en la posición #' + index)
       this.tareasCompletadas.push(this.listaDeTareas[index])
       this.listaDeTareas.splice(index, 1)
     },
 
+    Editar(tarea){
+      this.MostrarEditor = true
+      this.tareaQueEstoyEditando = tarea
+
+
+    },
+
   },
+
+  components:{
+      'editor-de-to-do-list': EditorDeToDoList
+    },
 }
 </script>
-import EditorDeToDoList from './EditorDeToDoList.vue'
+
+
 
 <style scoped>
 h3 {
